@@ -6,9 +6,10 @@ void soph_PGG::build_specials(){
 	strcpy(dir_name,"Org");
 }
 
-soph_PGG::soph_PGG(const double rate,const double dens){
+soph_PGG::soph_PGG(const double rate,const double dens, const double cost){
 	r = rate;
 	d = dens;
+	c = cost;
 
 	num_player = (int) (LL * dens);
 	Strategy = new int[LL];
@@ -88,13 +89,13 @@ double soph_PGG::unit_game(const int cent){ // location
 
 double soph_PGG::centre_game(const int cent){
 	// Note cent is the location
-	double profit = unit_game(cent);
+	double profit = unit_game(cent) - (double)(Strategy[WhichOne[cent]] % 2);
 	for(int i = 0; i < 4; i++){
 		profit += unit_game(Neighbour[cent][i]);
-		profit -= (WhichOne[Neighbour[cent][i]] == -1) ? 0: Strategy[WhichOne[cent]] % 2;
+		profit -= (WhichOne[Neighbour[cent][i]] == -1) ? 0: (double)(Strategy[WhichOne[cent]] % 2);
 	}
 
-	return profit;
+	return profit -= ( Strategy[WhichOne[cent]] / 2 == 0) ? 0 : c;
 }
 
 bool soph_PGG::have_neighbour(int place){
@@ -105,6 +106,9 @@ bool soph_PGG::have_neighbour(int place){
 }
 
 void soph_PGG::leave(int ppl){
+	if(LL - num_player <= 0)
+		return;
+
 	int empty_index = rand() % (LL - num_player);
 	int next_place = Empty[empty_index];
 
@@ -123,13 +127,11 @@ int soph_PGG::game(bool ptf){
 		char path[100];
 		//char dirt[100];
 		//sprintf(dirt,"%s_%03d",dir_name, (int)(d*100));
-		sprintf(path,"Dns_%03d_r_%04d.dat", (int)(d*100), (int)(r*1000));
+		sprintf(path,"dns_%03d_r_%04d_c_%04d.dat", (int)((d+0.00001)*100), (int)((r +0.000001)*1000), (int)((c +0.00001)*1000));
 		printf("Now file:%s\n",path);
 		//mkdir(dirt,0700);
 		file = fopen(path,"w+");
 	}
-	double rate[4] ={0.0, 0.0, 0.0, 0.0};
-
 	int itr = 10000;
 
 	for(int i = 0; i < itr + 1; i++){
@@ -149,7 +151,7 @@ int soph_PGG::game(bool ptf){
 					rate[3]);
 
 		}
-		if(i == itr){	
+		if(false){	
 			FILE *file2;
 			char path2[100];
 			sprintf(path2,"%d.dat",(int)(d*10000));
@@ -191,7 +193,7 @@ int soph_PGG::game(bool ptf){
 				continue;
 			}
 
-//			cout << x << ',' << y <<endl;
+//			printf("flag\n");
 			double x_earn = centre_game(x);
 			double y_earn = centre_game(y);
 

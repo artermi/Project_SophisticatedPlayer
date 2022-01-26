@@ -14,6 +14,7 @@
 
 class soph_PGG{
 public:
+	double c;
 	double r;
 	double d;
 	char dir_name[100];
@@ -26,7 +27,7 @@ public:
 	int num_player;
 
 	void build_specials();
-	soph_PGG(const double rate, const double dens);
+	soph_PGG(const double rate, const double dens, const double cost);
 	double unit_game(const int cent);
 	double centre_game(const int cent);
 	bool have_neighbour(int place);
