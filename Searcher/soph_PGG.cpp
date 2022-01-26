@@ -125,24 +125,6 @@ bool soph_PGG::have_neighbour(int place){
 	return false;
 }
 
-bool soph_PGG::bigger_than_coop_level(int place){
-	double coop_level = (double)(Cate_Player[1] + Cate_Player[3])/(double)num_player;
-
-	int local_coop = 0;
-	int useful = 0;
-	for(int i = 0; i < 4; i++){
-		int person = WhichOne[Neighbour[place][i]];
-		if(person == -1)
-			continue;
-		local_coop += Strategy[person] % 2;
-		useful ++;
-	}
-	if(useful == 0)
-		return false;
-
-	return (double) local_coop / (double)useful >= coop_level;
-
-}
 
 
 void soph_PGG::leave(int ppl){
@@ -152,33 +134,12 @@ void soph_PGG::leave(int ppl){
 	int empty_index = rand() % (LL - num_player);
 	int next_place = Empty[empty_index];
 
-	bool find_next = false;
-
-	for(int i = 0; i < (LL- num_player ) * 0.1; i++){
-		if( bigger_than_coop_level(next_place)){
-			find_next = true;
-			break;
-		}
-		empty_index = rand() % (LL - num_player);
-		next_place = Empty[empty_index];
+	int coor_level = Strategy[ppl] % 2;
+	for(int i = 0; i < 4; i++){
+		coor_level += Strategy[WhichOne[Neighbour[ppl][i]]] % 2;
 	}
-
-	if(false){
-		//find a list
-		int temp_list[LL - num_player];
-		for(int i = 0; i < LL - num_player; i++)
-			temp_list[i] = i;
-		for(int i = 0; i < LL - num_player; i++){
-			int rdm = (rand() % (LL - num_player - i)) + i;
-			swap(temp_list[i],temp_list[rdm]);
-		}
-		for(int i = 0; i < LL - num_player; i++){
-			empty_index = temp_list[i];
-			next_place = Empty[empty_index];
-			if( bigger_than_coop_level(next_place))
-				break;
-		}
-	}
+	if(coor_level >= 3 && Strategy[ppl] == 3)
+		return;
 
 
 	Empty[empty_index] = Where[ppl]; //this person's original place is empty now

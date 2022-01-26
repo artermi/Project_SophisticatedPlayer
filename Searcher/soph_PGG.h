@@ -35,7 +35,6 @@ public:
 	double unit_game(const int cent);
 	double centre_game(const int cent);
 	bool have_neighbour(int place);
-	bool bigger_than_coop_level(int place);
 	void leave(int ppl);
 	int game(bool ptf);
 };
