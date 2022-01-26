@@ -1,4 +1,5 @@
 #include "soph_PGG.h"
+#include <unistd.h>
 using namespace std;
 
 int main(int argc, char** argv){
@@ -12,6 +13,9 @@ int main(int argc, char** argv){
 //	}
 	for (double dens = 0.6; dens < 1.001; dens += 0.05){
 		for(double r = 3; r < 5; r +=0.1){
+
+			int rand_sleep = rand() % 1000;
+			usleep(rand_sleep*1000);
 
 			char file_name [50];
 			sprintf (file_name, "dns_%03d_r_%04d_c_%04d.dat",
