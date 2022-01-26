@@ -154,7 +154,7 @@ void soph_PGG::leave(int ppl){
 
 	bool find_next = false;
 
-	for(int i = 0; i < num_player / 200; i++){
+	for(int i = 0; i < (LL- num_player ) * 0.1; i++){
 		if( bigger_than_coop_level(next_place)){
 			find_next = true;
 			break;
