@@ -1,9 +1,13 @@
 #include "soph_PGG.h"
+#include <sys/types.h>
 #include <unistd.h>
+#include <cstdlib>
 using namespace std;
 
 int main(int argc, char** argv){
-	srand(time(NULL));
+
+	srand( getpid() * 1000);
+
 //	double dens = 0.6;
 //	double r = 3.0;
   double c = 0;
@@ -15,6 +19,7 @@ int main(int argc, char** argv){
 		for(double r = 3; r < 5; r +=0.1){
 
 			int rand_sleep = rand() % 1000;
+			printf("%d\n",rand_sleep);
 			usleep(rand_sleep*3000);
 
 			char file_name [50];
