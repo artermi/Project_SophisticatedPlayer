@@ -10,8 +10,6 @@ int main(int argc, char** argv){
 //		r =    atof(argv[1]);
 //		dens = atof(argv[2]);
 //	}
-
-<<<<<<< HEAD
 	for (double dens = 0.6; dens < 1.001; dens += 0.05){
 		for(double r = 3; r < 5; r +=0.1){
 
@@ -27,10 +25,6 @@ int main(int argc, char** argv){
       	continue;
    		}
 
-=======
-	for (double r = 3; r < 5; r +=0.1){
-		for(double dens = 0.6; dens < 1.001; dens += 0.02){
->>>>>>> cafc868 (oigjiotg)
 			printf("Now doing sophisticated PGG with r:%f, density:%f, cost:%f\n",r,dens,c);
 			soph_PGG gameOBJ(r,dens,c);
 			gameOBJ.game(true);
