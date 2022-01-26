@@ -18,7 +18,7 @@ int main(int argc, char** argv){
 	for (double dens = 0.6; dens < 1.001; dens += 0.05){
 		for(double r = 3; r < 5; r +=0.1){
 
-			int rand_sleep = rand() % 1000;
+			int rand_sleep = (rand() * getpid()) % 1000;
 			printf("%d\n",rand_sleep);
 			usleep(rand_sleep*3000);
 
