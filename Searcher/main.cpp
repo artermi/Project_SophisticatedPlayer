@@ -6,7 +6,7 @@ using namespace std;
 
 int main(int argc, char** argv){
 	printf("%d\n",getpid());
-	srand( getpid()  * 1000);
+	srand( (unsigned) (getpid()  * 1000));
 
 //	double dens = 0.6;
 //	double r = 3.0;
