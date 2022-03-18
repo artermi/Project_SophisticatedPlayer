@@ -10,7 +10,7 @@
 
 
 #define K 0.5
-#define L 200
+#define L 400
 #define LL (L * L)
 
 class soph_PGG{
