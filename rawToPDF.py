@@ -8,8 +8,8 @@ from PIL import Image
 
 for root,dirs,files in sorted(os.walk('.',topdown = False)):
 	for name in sorted(files):
-		pixsize = 20
-		row = 20
+		pixsize = 4
+		row = 100
 		data = np.zeros( (pixsize * row,pixsize * row,3), dtype=np.uint8 ) #
 		with open(os.path.join(root, name)) as file:
 			for line in file:

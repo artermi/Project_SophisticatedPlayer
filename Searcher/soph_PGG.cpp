@@ -131,13 +131,17 @@ void soph_PGG::leave(int ppl){
 	int coor_level = Strategy[ppl] % 2;
 	int num_ppl = 1;
 	for(int i = 0; i < 4; i++){
-		if(WhichOne[Neighbour[ppl][i]] != -1){
-			coor_level += Strategy[WhichOne[Neighbour[ppl][i]]] % 2;
+		int nei = Neighbour[Where[ppl]][i];
+		if(WhichOne[nei] != -1){
+			coor_level += Strategy[WhichOne[nei]] % 2;
 			num_ppl ++;
 		}
 	}
-	if(coor_level * 2 >=  num_ppl && Strategy[ppl] == 3)
+
+	if(coor_level * 2 >=  num_ppl){
+
 		return;
+	}
 
 
 	int empty_index = rand() % (LL - num_player);
