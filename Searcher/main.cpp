@@ -8,14 +8,14 @@ int main(int argc, char** argv){
 	printf("%d\n",getpid());
 	srand( (unsigned) (getpid()  * 1000));
 
-//	double dens = 0.6;
+	double dens = 0.98;
 //	double r = 3.0;
   double c = 0;
 //	if(argc > 2){
 //		r =    atof(argv[1]);
 //		dens = atof(argv[2]);
 //	}
-	for (double dens = 0.2; dens < 1.001; dens += 0.02){
+	//for (double dens = 0.2; dens < 1.001; dens += 0.02){
 		for(double r = 3; r < 5; r +=0.1){
 
 			int rand_sleep = rand() % 1000;
@@ -38,7 +38,7 @@ int main(int argc, char** argv){
 			soph_PGG gameOBJ(r,dens,c);
 			gameOBJ.game(true);
 		}
-	}
+	//}
 
 	return 0;
 }

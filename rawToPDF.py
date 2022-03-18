@@ -6,43 +6,40 @@ from PIL import Image
 # Create a 1024x1024x3 array of 8 bit unsigned integers
 
 
-for root,dirs,files in sorted(os.walk('raw',topdown = False)):
+for root,dirs,files in sorted(os.walk('.',topdown = False)):
 	for name in sorted(files):
-		data = np.zeros( (400,400,3), dtype=np.uint8 )
+		pixsize = 20
+		row = 20
+		data = np.zeros( (pixsize * row,pixsize * row,3), dtype=np.uint8 ) #
 		with open(os.path.join(root, name)) as file:
 			for line in file:
 				loc, typ = line.split()
 				tx,ty = loc[1:-1].split(',')
 				x,y = int(tx),int(ty)
 				#y = (y+100) % 400
-				x*=2
-				y*=2
+				x*= pixsize
+				y*= pixsize
 				if typ == '5':
-					data[x,y] = [255, 255, 255]
-					data[x+1,y] = [255, 255, 255]
-					data[x,y+1] = [255, 255, 255]
-					data[x+1,y+1] = [255, 255, 255]
-
+					for i in range(pixsize):
+						for j in range(pixsize):
+							data[x +i,y+j] = [255, 255, 255]
 				if typ == '0':
-					data[x,y] = [231, 76, 60]
-					data[x+1,y] = [231, 76, 60]
-					data[x,y+1] = [231, 76, 60]
-					data[x+1,y+1] = [231, 76, 60]
+					for i in range(pixsize):
+						for j in range(pixsize):
+							data[x+i,y+j] = [231, 76, 60]
 				if typ == '1':
-					data[x,y] = [46, 204, 113]
-					data[x+1,y] = [46, 204, 113]
-					data[x,y+1] = [46, 204, 113]
-					data[x+1,y+1] = [46, 204, 113]
+					for i in range(pixsize):
+						for j in range(pixsize):
+							data[x+i,y+j] = [46, 204, 113]
 				if typ == '2':
-					data[x,y] = [245, 183, 177]
-					data[x+1,y] = [245, 183, 177]
-					data[x,y+1] = [245, 183, 177]
-					data[x+1,y+1] = [245, 183, 177]	
+					for i in range(pixsize):
+						for j in range(pixsize):
+							data[x+i,y+j] = [245, 183, 177]	
 				if typ == '3':
-					data[x,y] = [171, 235, 198]
-					data[x+1,y] = [171, 235, 198]
-					data[x,y+1] = [171, 235, 198]
-					data[x+1,y+1] = [171, 235, 198]					
+					for i in range(pixsize):
+						for j in range(pixsize):
+							data[x+i,y+j] = [171, 235, 198]					
 
 			image = Image.fromarray(data)
+			print(name.split('.')[0])
 			image.save(name.split('.')[0] + '.png')                      # View in default viewer

@@ -182,13 +182,13 @@ int soph_PGG::game(bool ptf){
 			int y = Neighbour[x][ rand() % 4 ];
 			int p_y = WhichOne[y];
 
-			if(Strategy[p_x] / 2 == 1 && !have_neighbour(x)){
+			if(Strategy[p_x] / 2 >= 1 && !have_neighbour(x)){
 				leave(p_x);
 				continue;
 			}
 
 			if (p_y == -1 || Strategy[p_x] == Strategy[p_y]){
-				if(p_y != -1 && Strategy[p_y] /2 == 1)
+				if(p_y != -1 && Strategy[p_y] /2 >= 1)
 					leave(p_y);
 				continue;
 			}

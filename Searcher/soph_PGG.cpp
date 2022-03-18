@@ -44,6 +44,7 @@ soph_PGG::soph_PGG(const double rate,const double dens, const double cost){
 	}
 	for (int i = 0; i < num_player; ++i)
 		Where[i] = temp_Where[i];
+	delete [] temp_Where;
 
 	// Indicate which plaer is on place[i]
 	for(int i = 0; i < LL; ++i)
@@ -95,11 +96,7 @@ double soph_PGG::unit_game(const int cent){ // location
 		if (person == -1)
 			continue;
 		
-		if( Strategy[person] % 2 == 0)
-			contrib += 0;
-		else
-			contrib += 1.0;
-
+		contrib += (double) (Strategy[person] % 2);
 		p_number += 1.0;
 	}
 
@@ -131,16 +128,20 @@ void soph_PGG::leave(int ppl){
 	if(LL - num_player <= 0)
 		return;
 
-	int empty_index = rand() % (LL - num_player);
-	int next_place = Empty[empty_index];
-
 	int coor_level = Strategy[ppl] % 2;
+	int num_ppl = 1;
 	for(int i = 0; i < 4; i++){
-		coor_level += Strategy[WhichOne[Neighbour[ppl][i]]] % 2;
+		if(WhichOne[Neighbour[ppl][i]] != -1){
+			coor_level += Strategy[WhichOne[Neighbour[ppl][i]]] % 2;
+			num_ppl ++;
+		}
 	}
-	if(coor_level >= 3 && Strategy[ppl] == 3)
+	if(coor_level * 2 >=  num_ppl && Strategy[ppl] == 3)
 		return;
 
+
+	int empty_index = rand() % (LL - num_player);
+	int next_place = Empty[empty_index];
 
 	Empty[empty_index] = Where[ppl]; //this person's original place is empty now
 	WhichOne[Where[ppl]] = -1; // Now, nobody is on this position
@@ -164,8 +165,8 @@ int soph_PGG::game(bool ptf){
 	}
 	int itr = 10000;
 
+	double rate[4] ={0.0, 0.0, 0.0, 0.0};
 	for(int i = 0; i < itr + 1; i++){
-		double rate[4] ={0.0, 0.0, 0.0, 0.0};
 
 		if(i % 500 == 0){
 			for (int j = 0; j < 4; ++j)
@@ -178,11 +179,13 @@ int soph_PGG::game(bool ptf){
 					rate[3]);
 
 		}
-		if(false){	
+		if(false && i < 101){	//remember to remove
 			FILE *file2;
 			char path2[100];
-			sprintf(path2,"%d.dat",(int)(d*10000));
-			printf("Now file:%d\n",(int)(d*10000));
+			sprintf(path2,"dns_%03d_r_%04d_i_%04d.dat", (int)((d+0.00001)*100), (int)((r +0.000001)*1000), i);
+
+			
+			printf("Now file:%s\n",path2);
 			file2 = fopen(path2,"w+");
 			for(int j = 0; j < LL; j++){
 				int now_strag = (WhichOne[j] == -1) ? 5: Strategy[WhichOne[j]];
@@ -190,48 +193,50 @@ int soph_PGG::game(bool ptf){
 				fprintf(file2, "(%d,%d) %d\n", j % L, j / L, now_strag);
 			}
 
-			fclose(file2);	
+			fclose(file2);
+			if(i == 100)
+				break;
+		
 		}
 
-		bool conti_all = false;
+		bool stop_all = true;
 
 		for (int j = 0; j < 4; j++)
-			if(rate[j] - 0.00000001 <= 1 && rate[j] + 0.00000001 >= 1 || i == itr)
-				conti_all = true;
+			if(rate[j] - 0.00000001 >= 0 && rate[j] + 0.00000001 <= 1)
+				stop_all = false;
 
-		if(conti_all)
+		if(stop_all)
 			continue;
 		
 		for(int j = 0; j < LL; j++){
 			int p_x = rand() % num_player;
 			int x = Where[p_x];
 
+			if(Strategy[p_x] / 2 == 1){ //Sophisticated without neighbour
+				leave(p_x);
+				x = Where[p_x];
+				if(!have_neighbour(x)) // if still no neighbour
+					continue;
+			}
+
 			int y = Neighbour[x][ rand() % 4 ];
 			int p_y = WhichOne[y];
 
-			if(Strategy[p_x] / 2 == 1 && !have_neighbour(x)){
-				leave(p_x);
+			if(p_y == -1) // if place y is empty, just continue
 				continue;
-			}
 
-			if (p_y == -1 || Strategy[p_x] == Strategy[p_y]){
-				if(p_y != -1 && Strategy[p_y] /2 == 1)
-					leave(p_y);
+			if(Strategy[p_x] == Strategy[p_y]) //No need for same strategy
 				continue;
-			}
 
-//			printf("flag\n");
 			double x_earn = centre_game(x);
 			double y_earn = centre_game(y);
 
-			if ((double)rand()/(double)RAND_MAX < 1.0/( 1.0 + exp( (y_earn - x_earn)/K) ) ){
-				Cate_Player[Strategy[p_y]] --;
-				Strategy[p_y] = Strategy[p_x];
-				Cate_Player[Strategy[p_y]] ++;
+			if ((double)rand()/(double)RAND_MAX < 1.0/( 1.0 + exp( (x_earn - y_earn)/K) ) ){
+				Cate_Player[Strategy[p_x]] --;
+				Strategy[p_x] = Strategy[p_y];
+				Cate_Player[Strategy[p_x]] ++;
 			}
 
-			if (Strategy[p_y] / 2 == 1)
-				leave(p_y);
 		}
 	}
 
