@@ -4,12 +4,13 @@
 #include <time.h>
 #include <algorithm>
 #include <string>
+#include <cstring>
 #include <sys/stat.h>
 #include <sys/types.h>
 
 
 #define K 0.5
-#define L 200
+#define L 400
 #define LL (L * L)
 
 class soph_PGG{
@@ -18,7 +19,9 @@ public:
 	double r;
 	double d;
 	char dir_name[100];
+	bool above_level;
 
+	int Cate_Player[4];
 	int* Strategy;
 	int* Where;
 	int* WhichOne;
@@ -28,6 +31,7 @@ public:
 
 	void build_specials();
 	soph_PGG(const double rate, const double dens, const double cost);
+	~soph_PGG();
 	double unit_game(const int cent);
 	double centre_game(const int cent);
 	bool have_neighbour(int place);
