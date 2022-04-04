@@ -128,8 +128,8 @@ void soph_PGG::leave(int ppl){
 	if(LL - num_player <= 0)
 		return;
 
-	int coor_level = Strategy[ppl] % 2;
-	int num_ppl = 1;
+	int coor_level = 0;
+	int num_ppl = 0;
 	for(int i = 0; i < 4; i++){
 		int nei = Neighbour[Where[ppl]][i];
 		if(WhichOne[nei] != -1){
@@ -138,7 +138,7 @@ void soph_PGG::leave(int ppl){
 		}
 	}
 
-	if(coor_level * 2 >=  num_ppl){
+	if(coor_level * 2 >=  num_ppl && num_ppl != 0){
 
 		return;
 	}
