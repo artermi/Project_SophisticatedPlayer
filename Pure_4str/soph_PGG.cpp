@@ -22,9 +22,9 @@ soph_PGG::soph_PGG(const double rate,const double dens, const double cost){
 		Cate_Player[i] = 0;
 
 	for(int i = 0; i < LL; i++){
-		Strategy[i] = (i < num_player) ? i % 2: -1;
+		Strategy[i] = (i < num_player) ? i % 4: -1;
 		if(i < num_player)
-			Cate_Player[i % 2] ++; //How many players play stategy (i % 4)
+			Cate_Player[i % 4] ++; //How many players play stategy (i % 4)
 	}
 
 	/* if x % 2 == 0: defector (0,2) else cooperator (1,3)
@@ -128,8 +128,8 @@ void soph_PGG::leave(int ppl){
 	if(LL - num_player <= 0)
 		return;
 
-	int coor_level = Strategy[ppl] % 2;
-	int num_ppl = 1;
+	int coor_level = 0;
+	int num_ppl = 0;
 	for(int i = 0; i < 4; i++){
 		int nei = Neighbour[Where[ppl]][i];
 		if(WhichOne[nei] != -1){
@@ -138,7 +138,7 @@ void soph_PGG::leave(int ppl){
 		}
 	}
 
-	if(coor_level * 2 >=  num_ppl){
+	if(coor_level * 2 >=  num_ppl && num_ppl != 0){
 
 		return;
 	}

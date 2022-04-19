@@ -9,8 +9,8 @@ int main(int argc, char** argv){
 	srand( (unsigned) (getpid()  * 1000));
 
 	double dens = 0.98;
-	double r = 3.0;
-	double c = 0.00;
+//	double r = 3.0;
+  double c = 0;
 	if(argc > 2){
 		dens =    atof(argv[1]);
 		c = atof(argv[2]);
