@@ -209,26 +209,29 @@ int soph_PGG::game(bool ptf){
 		}
 
 		bool stop_all = true;
-		bool stop_all2 = true;
 
 		for (int j = 0; j < 4; j++)
 			if(rate[j] - 0.00000001 >= 0 && rate[j] + 0.00000001 <= 1)
 				stop_all = false;
 		//Update
-		for(int j = 1; j < 4; j++)
-			for(int k = 0; k < 4; k++)
-				exrate[j - 1][k] = exrate[j][k];
-		for(int k = 0; k< 4; k++)
-			exrate[3][k] = rate[k];
+		if(i % 500 = 0){
+			bool stop_all2 = true;
+			for(int j = 1; j < 4; j++)
+				for(int k = 0; k < 4; k++)
+					exrate[j - 1][k] = exrate[j][k];
+			for(int k = 0; k< 4; k++)
+				exrate[3][k] = rate[k];
 
-		for(int j = 1; j < 4; j++)
-			for (int k = 0; k < 4; ++k)
-			{
-				if(rate[k] - exrate[j][k] >= eps || rate[k] - exrate[j][k] <= eps)
-					stop_all2 = false;
-			}
-
-		if(stop_all || stop_all2)
+			for(int j = 1; j < 4; j++)
+				for (int k = 0; k < 4; ++k)
+				{
+					if(rate[k] - exrate[j][k] >= eps || rate[k] - exrate[j][k] <= eps)
+						stop_all2 = false;
+				}
+			if(stop_all2)
+				continue
+		}
+		if(stop_all)
 			continue;
 		
 		for(int j = 0; j < LL; j++){
