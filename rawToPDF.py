@@ -26,19 +26,19 @@ for root,dirs,files in sorted(os.walk('.',topdown = False)):
 				if typ == '0':
 					for i in range(pixsize):
 						for j in range(pixsize):
-							data[x+i,y+j] = [231, 76, 60]
+							data[x+i,y+j] = [203, 67, 53]
 				if typ == '1':
 					for i in range(pixsize):
 						for j in range(pixsize):
-							data[x+i,y+j] = [46, 204, 113]
+							data[x+i,y+j] = [40, 116, 166]
 				if typ == '2':
 					for i in range(pixsize):
 						for j in range(pixsize):
-							data[x+i,y+j] = [245, 183, 177]	
+							data[x+i,y+j] = [250,128,114]	
 				if typ == '3':
 					for i in range(pixsize):
 						for j in range(pixsize):
-							data[x+i,y+j] = [171, 235, 198]					
+							data[x+i,y+j] = [133,193,233]					
 
 			image = Image.fromarray(data)
 			print(name.split('.')[0])
