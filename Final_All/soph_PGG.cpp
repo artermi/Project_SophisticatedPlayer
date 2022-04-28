@@ -170,7 +170,7 @@ int soph_PGG::game(bool ptf){
 	int itr = 500000;
 
 	double exrate[4][4];
-	for(int i = 0; i = 4; i++){
+	for(int i = 0; i < 4; i++){
 		for(int j = 0; j< 4; j++)
 			exrate[i][j] = -0.1;
 	}
