@@ -229,7 +229,7 @@ int soph_PGG::game(bool ptf){
 						stop_all2 = false;
 				}
 			if(stop_all2)
-				continue
+				continue;
 		}
 		if(stop_all)
 			continue;
