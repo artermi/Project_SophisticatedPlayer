@@ -10,7 +10,7 @@ int main(int argc, char** argv){
 
 //	double dens = 0.98;
 //	double r = 3.0;
-  double c = 0;
+  double c = 0.08;
 //	if(argc > 2){
 //		r =    atof(argv[1]);
 //		dens = atof(argv[2]);
