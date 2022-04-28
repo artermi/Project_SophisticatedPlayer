@@ -214,7 +214,7 @@ int soph_PGG::game(bool ptf){
 			if(rate[j] - 0.00000001 >= 0 && rate[j] + 0.00000001 <= 1)
 				stop_all = false;
 		//Update
-		if(i % 500 = 0){
+		if(i % 500 == 0){
 			bool stop_all2 = true;
 			for(int j = 1; j < 4; j++)
 				for(int k = 0; k < 4; k++)
