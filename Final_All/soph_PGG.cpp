@@ -175,6 +175,7 @@ int soph_PGG::game(bool ptf){
 			exrate[i][j] = -0.1;
 	}
 	double rate[4] ={0.0, 0.0, 0.0, 0.0};
+	bool stop_all2 = false;
 	for(int i = 0; i < itr + 1; i++){
 
 		if(i % 500 == 0){
@@ -215,7 +216,7 @@ int soph_PGG::game(bool ptf){
 				stop_all = false;
 		//Update
 		if(i % 500 == 0){
-			bool stop_all2 = true;
+			stop_all2 = true;
 			for(int j = 1; j < 4; j++)
 				for(int k = 0; k < 4; k++)
 					exrate[j - 1][k] = exrate[j][k];
@@ -228,13 +229,8 @@ int soph_PGG::game(bool ptf){
 					if(rate[k] - exrate[j][k] >= eps || exrate[j][k] - rate[k] >= eps)
 						stop_all2 = false;
 				}
-
-			if(stop_all2){
-				printf("What?\n");
-				continue;
-			}
 		}
-		if(stop_all)
+		if(stop_all || stop_all2)
 			continue;
 		
 		for(int j = 0; j < LL; j++){
