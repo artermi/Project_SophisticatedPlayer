@@ -225,7 +225,7 @@ int soph_PGG::game(bool ptf){
 			for(int j = 1; j < 4; j++)
 				for (int k = 0; k < 4; ++k)
 				{
-					if(rate[k] - exrate[j][k] >= eps || rate[k] - exrate[j][k] <= eps)
+					if(rate[k] - exrate[j][k] >= eps || rate[k] - exrate[j][k] >= eps)
 						stop_all2 = false;
 				}
 			if(stop_all2)
