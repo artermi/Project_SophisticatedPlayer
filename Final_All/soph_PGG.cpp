@@ -230,7 +230,7 @@ int soph_PGG::game(bool ptf){
 				}
 
 			if(stop_all2){
-				printf('What?\n');
+				printf("What?\n");
 				continue;
 			}
 		}
