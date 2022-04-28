@@ -12,7 +12,7 @@
 #define K 0.5
 #define L 400
 #define LL (L * L)
-#define eps 0.0001
+#define eps 0.0005
 
 class soph_PGG{
 public:
