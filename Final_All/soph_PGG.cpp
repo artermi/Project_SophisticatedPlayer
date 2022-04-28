@@ -228,8 +228,11 @@ int soph_PGG::game(bool ptf){
 					if(rate[k] - exrate[j][k] >= eps || exrate[j][k] - rate[k] >= eps)
 						stop_all2 = false;
 				}
-			if(stop_all2)
+
+			if(stop_all2){
+				printf('What?\n');
 				continue;
+			}
 		}
 		if(stop_all)
 			continue;
