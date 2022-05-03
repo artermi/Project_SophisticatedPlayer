@@ -25,11 +25,14 @@ int main(int argc, char** argv){
 
 		  FILE *file;
 		  file = fopen(file_name, "r");
-   		if (file) {
-      	fclose(file);
-      	printf("file:'%s' exists\n",file_name);
-      	continue;
-   		}
+	   		if (file) {
+		      	fclose(file);
+	    	  	printf("file:'%s' exists\n",file_name);
+	      		continue;
+	   		}
+	   		else{
+	   			file = fopen(file_name, "w+");
+	   		}
 
 			printf("Now doing sophisticated PGG with r:%f, density:%f, times:%.0f\n",r,dens,c);
 			soph_PGG gameOBJ(r,dens,c);
