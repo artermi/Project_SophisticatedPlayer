@@ -167,7 +167,7 @@ int soph_PGG::game(bool ptf){
 		//mkdir(dirt,0700);
 		file = fopen(path,"w+");
 	}
-	int itr = 500000;
+	int itr = 600000;
 
 	double exrate[4][4];
 	for(int i = 0; i < 4; i++){
@@ -189,7 +189,7 @@ int soph_PGG::game(bool ptf){
 					rate[3]);
 
 		}
-		if(i == itr){	//remember to remove
+		if(i > 500000 && i % 100 == 0){	//remember to remove
 			FILE *file2;
 			char path2[100];
 			sprintf(path2,"SNAP_dns_%03d_r_%04d_i_%04d.dat", (int)((d+0.00001)*100), (int)((r +0.000001)*1000), i);
@@ -215,22 +215,7 @@ int soph_PGG::game(bool ptf){
 			if(rate[j] - 0.00000001 >= 0 && rate[j] + 0.00000001 <= 1)
 				stop_all = false;
 		//Update
-		if(i % 500 == 0){
-			stop_all2 = true;
-			for(int j = 1; j < 4; j++)
-				for(int k = 0; k < 4; k++)
-					exrate[j - 1][k] = exrate[j][k];
-			for(int k = 0; k< 4; k++)
-				exrate[3][k] = rate[k];
-
-			for(int j = 1; j < 4; j++)
-				for (int k = 0; k < 4; ++k)
-				{
-					if(rate[k] - exrate[j][k] >= eps || exrate[j][k] - rate[k] >= eps)
-						stop_all2 = false;
-				}
-		}
-		if(stop_all || stop_all2)
+		if(stop_all)
 			continue;
 		
 		for(int j = 0; j < LL; j++){
