@@ -31,11 +31,12 @@ def main():
 		arrays = []
 		length = 400
 		for name in sorted(files):
+			if 'SNAP' not in name:
+				continue
 			arrays.append(caculate_one(name,length))
 
 		for ele in arrays:
-			print(ele/(2*length *length), end = ' ')
-		
+			print(ele/( 2 *length * length), end = ' ')
 
 if __name__ == '__main__':
 	main()
