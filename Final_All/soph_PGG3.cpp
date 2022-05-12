@@ -167,7 +167,7 @@ int soph_PGG::game(bool ptf){
 		//mkdir(dirt,0700);
 		file = fopen(path,"w+");
 	}
-	int itr = 50;
+	int itr = 20000;
 
 	double exrate[4][4];
 	for(int i = 0; i < 4; i++){
@@ -192,7 +192,7 @@ int soph_PGG::game(bool ptf){
 		if(i == itr){	//remember to remove
 			FILE *file2;
 			char path2[100];
-			sprintf(path2,"SNAP_dns_%03d_r_%04d_t_%03d.dat", (int)((d+0.00001)*100), (int)((r +0.000001)*1000), (int)(c+0.00001) );
+			sprintf(path2,"SNAP_dns_%03d_r_%04d_t_%03d_a.dat", (int)((d+0.00001)*100), (int)((r +0.000001)*1000), (int)(c+0.00001) );
 
 			
 			printf("Now file:%s\n",path2);
