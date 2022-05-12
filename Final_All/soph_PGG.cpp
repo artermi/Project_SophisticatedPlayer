@@ -167,7 +167,7 @@ int soph_PGG::game(bool ptf){
 		//mkdir(dirt,0700);
 		file = fopen(path,"w+");
 	}
-	int itr = 500000;
+	int itr = 20000;
 
 	double exrate[4][4];
 	for(int i = 0; i < 4; i++){
