@@ -1,4 +1,4 @@
-#include "soph_PGG4.h"
+#include "soph_PGG.h"
 #include <sys/types.h>
 #include <unistd.h>
 #include <cstdlib>

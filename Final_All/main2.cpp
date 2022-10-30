@@ -17,7 +17,7 @@ int main(int argc, char** argv){
 	for (double c = 1.0; c < 1000; c += 1.0){
 			int rand_sleep = rand() % 1000;
 
-			usleep(rand_sleep*3000);
+			usleep(rand_sleep*1000);
 
 			char file_name [60];
 			sprintf(file_name,"SNAP_dns_%03d_r_%04d_t_%03d.dat", 

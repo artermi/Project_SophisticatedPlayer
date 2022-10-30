@@ -22,9 +22,10 @@ soph_PGG::soph_PGG(const double rate,const double dens, const double cost){
 		Cate_Player[i] = 0;
 
 	for(int i = 0; i < LL; i++){
-		Strategy[i] = (i < num_player) ? (i % 5 < 4)? 0: 1 : -1;
+		int st = (i % 5 < 4)? 0: 1;
+		Strategy[i] = (i < num_player) ? st : -1;
 		if(i < num_player)
-			Cate_Player[i % 2] ++; //How many players play stategy (i % 4)
+			Cate_Player[ st ] ++; //How many players play stategy (i % 4)
 	}
 
 	/* if x % 2 == 0: defector (0,2) else cooperator (1,3)
