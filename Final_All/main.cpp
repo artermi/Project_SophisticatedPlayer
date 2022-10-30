@@ -1,4 +1,4 @@
-#include "soph_PGG.h"
+#include "soph_PGG4.h"
 #include <sys/types.h>
 #include <unistd.h>
 #include <cstdlib>
@@ -20,7 +20,7 @@ int main(int argc, char** argv){
 
 			int rand_sleep = rand() % 1000;
 
-			usleep(rand_sleep*3000);
+			usleep(rand_sleep*1000);
 
 			char file_name [50];
 			sprintf (file_name, "dns_%03d_r_%04d_c_%04d.dat",
