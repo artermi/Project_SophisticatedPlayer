@@ -23,6 +23,7 @@ soph_PGG::soph_PGG(const double rate,const double dens, const double cost){
 
 	for(int i = 0; i < LL; i++){
 		int st = (i % 5 < 4)? 0: 1;
+		   st += (i % 2 == 0)? 0:2;
 		Strategy[i] = (i < num_player) ? st : -1;
 		if(i < num_player)
 			Cate_Player[ st ] ++; //How many players play stategy (i % 4)
@@ -168,7 +169,7 @@ int soph_PGG::game(bool ptf){
 		//mkdir(dirt,0700);
 		file = fopen(path,"w+");
 	}
-	int itr = 20000;
+	int itr = 10000;
 
 	double exrate[4][4];
 	for(int i = 0; i < 4; i++){
@@ -190,7 +191,7 @@ int soph_PGG::game(bool ptf){
 					rate[3]);
 
 		}
-		if(i == itr){	//remember to remove
+		if(false){	//remember to remove
 			FILE *file2;
 			char path2[100];
 			sprintf(path2,"SNAP_dns_%03d_r_%04d_t_%03d_a.dat", (int)((d+0.00001)*100), (int)((r +0.000001)*1000), (int)(c+0.00001) );
