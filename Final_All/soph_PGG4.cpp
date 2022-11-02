@@ -22,7 +22,7 @@ soph_PGG::soph_PGG(const double rate,const double dens, const double cost){
 		Cate_Player[i] = 0;
 
 	for(int i = 0; i < LL; i++){
-		int st = (i % 5 < 4)? 0: 1;
+		int st = (i % 5 < 4)? 1: 0;
 		   st += (i % 2 == 0)? 0:2;
 		Strategy[i] = (i < num_player) ? st : -1;
 		if(i < num_player)
