@@ -15,7 +15,7 @@ int main(int argc, char** argv){
 //		r =    atof(argv[1]);
 //		dens = atof(argv[2]);
 //	}
-		for(double r = 3; r < 5.01; r +=0.05){
+		for(double r = 3.7; r < 3.8; r +=0.01){
 			int rand_sleep = rand() % 1000;
 
 			usleep(rand_sleep*1000);
