@@ -22,7 +22,7 @@ soph_PGG::soph_PGG(const double rate,const double dens, const double cost){
 		Cate_Player[i] = 0;
 
 	for(int i = 0; i < LL; i++){
-		int st = (i % 5 < 4)? 1: 0;
+		int st = (i % 10 < 2)? 1: 0;
 		Strategy[i] = (i < num_player) ? st : -1;
 		if(i < num_player)
 			Cate_Player[ st ] ++; //How many players play stategy (i % 4)
@@ -179,7 +179,7 @@ int soph_PGG::game(bool ptf){
 	bool stop_all2 = false;
 	for(int i = 0; i < itr + 1; i++){
 
-		if(i % 500 == 0){
+		if(i % 50 == 0){
 			for (int j = 0; j < 4; ++j)
 				rate[j] = (double) Cate_Player[j] / (double) num_player;
 
